@@ -1,8 +1,8 @@
-import './App.css';
+import MealsList from './Components/MealsList/MealsList';
 
 function App() {
   return (
-    <div>aaa</div>
+    <MealsList/>
   );
 }
 
