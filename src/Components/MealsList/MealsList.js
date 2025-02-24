@@ -1,22 +1,15 @@
 import MealItem from './MealItem/MealItem';
 import classes from './MealsList.module.css';
 
-const MealsList = () =>{
+const MealsList = (props) =>{
     return(
         <div className={classes.MealsList}>
-            <MealItem/>
-            <MealItem/>
-            <MealItem/>
-            <MealItem/>
-            <MealItem/>
-            <MealItem/>
-            <MealItem/>
-            <MealItem/>
-            <MealItem/>
-            <MealItem/>
-            <MealItem/>
-            <MealItem/>
-
+            {props.meals.map(item => <MealItem key={item.id} 
+                                                {...item} 
+                                                cart = {props.cart}
+                                                addItem={props.addItem}
+                                                deleteItem={props.deleteItem}
+                                                />)}
         </div>
     );
 };

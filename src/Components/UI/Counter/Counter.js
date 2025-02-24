@@ -7,12 +7,12 @@ const Counter = (props) =>{
             {
                 (props.amount && props.amount > 0) ? (
                     <>
-                        <button className={classes.sub}>-</button>
+                        <button onClick={props.deleteItem} className={classes.sub}>-</button>
                         <span className={classes.count}>{props.amount}</span>
                     </>
                 ) : null
             }
-            <button className={classes.add}>+</button>
+            <button onClick={props.addItem} className={classes.add}>+</button>
         </div>
     );
 }

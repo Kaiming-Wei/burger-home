@@ -1,22 +1,21 @@
 import classes from './MealItem.module.css';
 import Counter from '../../UI/Counter/Counter';
 
-const MealItem = () =>{
+const MealItem = (props) =>{
     return(
         <div className={classes.item}>
             <div className={classes.imageBox}>
-                <img src="/img/meals/1.png" ></img>
+                <img src={props.img} ></img>
             </div>
 
             <div className={classes.contentsBox}>
-                <h2 className={classes.name}>Cheeseburger</h2>
-                <p className={classes.desc}>A cheeseburger is a classic sandwich consisting 
-                    of a grilled or pan-seared beef patty served in 
-                    a sliced bun, topped with a slice of melted cheese. 
-                    </p>
+                <h2 className={classes.name}>{props.name}</h2>
+                <p className={classes.desc}> {props.desc} </p>
                 <div className={classes.counter}>
-                    <span className={classes.price}>2.5</span>
-                    <Counter amount={2}/>
+                    <span className={classes.price}>{props.price}</span>
+                    <Counter addItem={()=>props.addItem(props.id, props.price)} 
+                            deleteItem = {()=>props.deleteItem(props.id, props.price)}
+                            amount={props.cart[props.id]}/>
                 </div>
             </div>
         </div>
