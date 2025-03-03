@@ -1,5 +1,6 @@
 import MealsList from './Components/MealsList/MealsList';
 import {useState} from 'react';
+import CartContext from './Store/CartContext';
 
 const MEALS_DATA = [
   {
@@ -84,9 +85,11 @@ function App() {
         return cartMap;
     });
 
-}
+  }
   return (
-    <MealsList meals={meals} cart={cart} addItem={addItem} deleteItem={deleteItem}/>
+    <CartContext.Provider value={{...cart, addItem, deleteItem}}>
+      <MealsList meals={meals}/>
+    </CartContext.Provider>
   );
 }
 

@@ -5,10 +5,7 @@ const MealsList = (props) =>{
     return(
         <div className={classes.MealsList}>
             {props.meals.map(item => <MealItem key={item.id} 
-                                                {...item} 
-                                                cart = {props.cart}
-                                                addItem={props.addItem}
-                                                deleteItem={props.deleteItem}
+                                               meal = {item}
                                                 />)}
         </div>
     );

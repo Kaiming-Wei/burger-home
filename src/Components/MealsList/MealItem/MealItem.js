@@ -5,17 +5,15 @@ const MealItem = (props) =>{
     return(
         <div className={classes.item}>
             <div className={classes.imageBox}>
-                <img src={props.img} ></img>
+                <img src={props.meal.img} ></img>
             </div>
 
             <div className={classes.contentsBox}>
-                <h2 className={classes.name}>{props.name}</h2>
-                <p className={classes.desc}> {props.desc} </p>
+                <h2 className={classes.name}>{props.meal.name}</h2>
+                <p className={classes.desc}> {props.meal.desc} </p>
                 <div className={classes.counter}>
-                    <span className={classes.price}>{props.price}</span>
-                    <Counter addItem={()=>props.addItem(props.id, props.price)} 
-                            deleteItem = {()=>props.deleteItem(props.id, props.price)}
-                            amount={props.cart[props.id]}/>
+                    <span className={classes.price}>{props.meal.price}</span>
+                    <Counter meal={props.meal} />
                 </div>
             </div>
         </div>
