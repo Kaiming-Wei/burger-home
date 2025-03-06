@@ -10,7 +10,7 @@
 .imageBox{
     width: 360rem;
 }
-img{
+.imageIcon{
     width: 100%;
     object-fit: cover;
 }

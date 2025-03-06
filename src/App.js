@@ -2,6 +2,7 @@ import MealsList from './Components/MealsList/MealsList';
 import {useState} from 'react';
 import CartContext from './Store/CartContext';
 import Search from './Components/Search/Search';
+import Cart from './Components/Cart/Cart';
 
 const MEALS_DATA = [
   {
@@ -78,8 +79,8 @@ function App() {
             delete cartMap[id];
           }
         }
-        cartMap['totalItam'] = (cartMap['totalItam']) - 1;
-        if(cartMap['totalItam'] < 0) cartMap['totalItam'] = 0;
+        cartMap['totalItem'] = (cartMap['totalItem']) - 1;
+        if(cartMap['totalItem'] < 0) cartMap['totalItem'] = 0;
 
         cartMap['totalPrice'] = (cartMap['totalPrice']) - price;
         if(cartMap['totalPrice'] < 0) cartMap['totalPrice'] = 0; 
@@ -108,6 +109,7 @@ function App() {
           <Search searchItem={searchItem}/>
           <CartContext.Provider value={{...cart, addItem, deleteItem}}>
             <MealsList meals={meals}/>
+            <Cart/>
           </CartContext.Provider>
     </div>
 
