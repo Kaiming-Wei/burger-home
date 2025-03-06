@@ -96,7 +96,7 @@ function App() {
     let filterMeal = MEALS_DATA.filter(item => {
       return(
         item.name.toLowerCase().includes(keyword) ||
-        item.desc.toLowerCase().includes(keyword) ||
+        // item.desc.toLowerCase().includes(keyword) ||
         item.price.toString().includes(keyword)
       )
     });

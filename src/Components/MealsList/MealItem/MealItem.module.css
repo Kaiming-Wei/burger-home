@@ -12,11 +12,13 @@
 }
 img{
     width: 100%;
+    object-fit: cover;
 }
 
 
 .contentsBox{
-    padding-left: 10rem;
+    padding-left: 20rem;
+    width: 1000rem;
 }
 
 .name{
