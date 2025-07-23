@@ -23,6 +23,7 @@
 }
 
 .count{
-    font-size: 20rem;
+    font-weight: bold;
+    font-size: 24rem;
     margin: 0 10rem;
 }

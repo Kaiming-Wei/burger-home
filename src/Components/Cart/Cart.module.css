@@ -10,6 +10,7 @@
 
     border-radius: 60rem;
     background-color: #3a3737;
+    z-index: 9999;
 }
 
 .Iconbox{
@@ -53,6 +54,10 @@
     background-color: #FCBF49;
     font-weight: bold;
     font-size: 28rem;
+}
+.DisableBtn{
+    color: #777;
+    background-color: #aaa;
 }
 
 .Price{

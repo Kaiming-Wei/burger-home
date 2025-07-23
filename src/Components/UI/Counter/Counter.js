@@ -6,24 +6,24 @@ import CartContext from '../../../Store/CartContext';
 
 const Counter = (props) =>{
     const cartCtx = useContext(CartContext);
+
     const addHandler = () =>{
-        cartCtx.addItem(props.meal.id, props.meal.price);
+        cartCtx.addItem(props.meal);
     }
 
     const deleteHandler = () =>{
-        cartCtx.deleteItem(props.meal.id, props.meal.price);
+        cartCtx.deleteItem(props.meal);
     }
 
     return(
         <div className={classes.counter}>
-
             {
-                (cartCtx[props.meal.id] && cartCtx[props.meal.id] > 0) ? (
+                (props.meal.amount > 0) ? (
                     <>
                         <button onClick={deleteHandler} className={classes.sub}>
                         <FontAwesomeIcon icon={faMinus} />
                         </button>
-                        <span className={classes.count}>{cartCtx[props.meal.id]}</span>
+                        <span className={classes.count}>{props.meal.amount}</span>
                     </>
                 ) : null
             }

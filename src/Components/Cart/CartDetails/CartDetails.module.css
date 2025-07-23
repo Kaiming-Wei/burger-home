@@ -1,0 +1,39 @@
+.CartDetails{
+    background-color: aliceblue;
+    position: absolute;
+    bottom: 0;
+
+    width: 750rem;
+    padding-bottom: 220rem;
+
+    border-top-left-radius: 30rem;
+    border-top-right-radius: 30rem;
+
+    max-height: 1200rem;
+    flex-flow: column;
+    display: flex;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 30rem;
+}
+
+h2{
+    margin: 0;
+    padding: 0;
+}
+
+.Empty{
+    font-weight: normal;
+    color: rgba(0,0,0, 0.8)
+}
+
+.Empty span{
+    margin-left: 10rem;
+}
+
+.MealList{
+    overflow: auto;
+}

@@ -10,7 +10,10 @@ const MealItem = (props) =>{
 
             <div className={classes.contentsBox}>
                 <h2 className={classes.name}>{props.meal.name}</h2>
-                <p className={classes.desc}> {props.meal.desc} </p>
+
+                {props.noDesc ? null : <p className={classes.desc}> {props.meal.desc} </p>}
+                {/* <p className={classes.desc}> {props.meal.desc} </p> */}
+
                 <div className={classes.counter}>
                     <span className={classes.price}>{props.meal.price}</span>
                     <Counter meal={props.meal} />

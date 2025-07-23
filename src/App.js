@@ -58,31 +58,39 @@ const MEALS_DATA = [
 
 function App() {
   const [meals, setMeals] = useState(MEALS_DATA);
-  const [cart, setCart] = useState({});
+  const [cart, setCart] = useState({
+    items : [],
+    totalItem: 0,
+    totalPrice: 0.0
+  });
 
-  const addItem = (id, price) => {
+  const addItem = (meal) => {
       setCart(prevCart => {
-          let cartMap = {...prevCart};
-          cartMap[id] = (cartMap[id] || 0) + 1;
+          const cartMap = {...prevCart};
+          if(cartMap.items.indexOf(meal) === -1){
+            cartMap.items.push(meal)
+            meal.amount = 1;
+          }else{
+            meal.amount += 1;
+          }
           cartMap['totalItem'] = (cartMap['totalItem'] || 0) + 1;
-          cartMap['totalPrice'] = (cartMap['totalPrice'] || 0) + price;
+          cartMap['totalPrice'] = (cartMap['totalPrice'] || 0) + meal.price;
           return cartMap;
       });
 
+
   }
-  const deleteItem = (id, price) => {
+  const deleteItem = (meal) => {
     setCart(prevCart => {
         let cartMap = {...prevCart};
-        if(cartMap[id]){
-          cartMap[id] = cartMap[id] - 1;
-          if(cartMap[id] === 0){
-            delete cartMap[id];
-          }
+        meal.amount -= 1;
+        if(meal.amount === 0){
+          cartMap.items.splice(cartMap.items.indexOf(meal), 1);
         }
         cartMap['totalItem'] = (cartMap['totalItem']) - 1;
         if(cartMap['totalItem'] < 0) cartMap['totalItem'] = 0;
 
-        cartMap['totalPrice'] = (cartMap['totalPrice']) - price;
+        cartMap['totalPrice'] = (cartMap['totalPrice']) - meal.price;
         if(cartMap['totalPrice'] < 0) cartMap['totalPrice'] = 0; 
         return cartMap;
     });
