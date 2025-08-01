@@ -4,17 +4,45 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import CartContext from '../../../Store/CartContext';
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import MealItem from '../../MealsList/MealItem/MealItem';
+import Confirm from '../../UI/ConfirmUI/Confirm';
 
-const CartDetails = () => {
+const CartDetails = (props) => {
     const Cartctx = useContext(CartContext);
+    const [ShowConfirm, setShowConfirm] = useState(false);
+
+    const EmptyHandler = () => {
+        setShowConfirm(true);
+    }
+
+    const ConfirmDelete = () =>{
+        Cartctx.emptyCart();
+    }
+
+    const CancelDelete = (event) =>{
+        event.stopPropagation();
+        setShowConfirm(false);
+    }
+
+
+
     return(
         <Backdrop>
-            <div className={classes.CartDetails}>
+            {ShowConfirm && 
+            <Confirm 
+                Text={'Are you sure to empty the cart?'}
+                ConfirmDelete = {ConfirmDelete}
+                CancelDelete = {CancelDelete}
+            />}
+            <div 
+                onClick={(event) => event.stopPropagation()}
+                className={classes.CartDetails}>
                 <header className={classes.header}>
                     <h2>Cart Details</h2>
-                    <div className={classes.Empty}>
+                    <div 
+                        onClick={EmptyHandler}
+                        className={classes.Empty}>
                         <FontAwesomeIcon icon={faTrash} />
                         <span>Empty</span>
                     </div>

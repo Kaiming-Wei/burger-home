@@ -112,10 +112,23 @@ function App() {
 
     setMeals(filterMeal);
   }
+
+  const emptyCart = () => {
+    setCart( (prevs) => {
+      let cartMap = {...prevs};
+      cartMap.items.forEach(item => item.amount = 0)
+      cartMap.items = [];
+      cartMap.totalItem = 0;
+      cartMap.totalPrice = 0.0;
+      return(cartMap);
+    });
+    
+  }
+
   return (
     <div>
           <Search searchItem={searchItem}/>
-          <CartContext.Provider value={{...cart, addItem, deleteItem}}>
+          <CartContext.Provider value={{...cart, addItem, deleteItem, emptyCart}}>
             <MealsList meals={meals}/>
             <Cart/>
           </CartContext.Provider>

@@ -1,0 +1,38 @@
+
+.CheckoutItem{
+    display: flex;
+}
+
+.Image{
+    width: 120rem;
+}
+
+.Image img{
+    width: 100%;
+}
+
+.Desc{
+    flex: auto;
+    margin-left: 20rem;
+}
+
+.Name{
+    font-size: 28rem;
+    margin: 20rem 0;
+}
+
+.Amount{
+    display: flex;
+    justify-content: space-between;
+}
+
+.Price{
+    font-size: 26rem;
+    font-weight: bold;
+}
+
+.Price::before{
+    content: '$';
+    font-size: 20rem;
+    font-weight: normal;
+}

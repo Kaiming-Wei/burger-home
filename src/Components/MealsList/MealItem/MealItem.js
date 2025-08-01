@@ -5,7 +5,7 @@ const MealItem = (props) =>{
     return(
         <div className={classes.item}>
             <div className={classes.imageBox}>
-                <img className={classes.imageIcon} src={props.meal.img} ></img>
+                <img className={classes.imageIcon} src={props.meal.img} alt='' ></img>
             </div>
 
             <div className={classes.contentsBox}>

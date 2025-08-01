@@ -1,0 +1,115 @@
+.CheckoutPage{
+    background-color: #eee;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 9999;
+}
+
+.Back{
+    padding: 16rem;
+}
+
+.Details{
+    background-color: white;
+    border-radius: 20px;
+    padding: 20rem;
+    margin: 20rem;
+}
+
+.Header{
+    height: 60rem;
+    border-bottom: 1px solid #d4d2d2;
+    font-size: 36rem;
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+}
+
+.List{
+    max-height: 1000rem;
+    overflow: auto;
+
+}
+
+.Footer{
+    height: 80rem;
+    position: relative;
+    border-top: 1px dashed #d4d2d2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10rem;
+}
+
+.Footer::before,
+.Footer::after{
+    content: '';
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    background-color: #eee;
+    position: absolute;
+    top: -10rem;
+    left: -30rem;
+}
+.Footer::after{
+    left: auto;
+    right: -30rem;
+}
+
+.TotalPrice{
+    font-size: 30rem;
+    font-weight: bold;
+}
+.TotalPrice::before{
+    content:'Total: $';
+    font-size: 22rem;
+    font-weight: normal;
+}
+
+
+.Cart{
+    position: fixed;
+    bottom: 80rem;
+    left: 25rem;
+    height: 80rem;
+    width: 700rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-radius: 60rem;
+    background-color: #3a3737;
+    z-index: 9999;
+}
+.Amount{
+    color: white;
+    font-size: 40rem;
+    font-weight: bold;
+    margin-left: 40rem;
+}
+.Amount::before{
+    content: 'Total: $';
+    font-size: 26rem;
+    font-weight: normal;
+}
+
+.CheckoutBtn{
+    border: none;
+    border-radius: 60rem;
+    height: 80rem;
+    width: 180rem;
+    background-color: #FCBF49;
+    font-weight: bold;
+    font-size: 28rem;
+}
+.DisableBtn{
+    color: #777;
+    background-color: #aaa;
+}
