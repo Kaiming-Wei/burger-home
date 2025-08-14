@@ -17,7 +17,7 @@ const CartDetails = (props) => {
     }
 
     const ConfirmDelete = () =>{
-        Cartctx.emptyCart();
+        Cartctx.cartDispatch({type: 'CLEAR'});
     }
 
     const CancelDelete = (event) =>{

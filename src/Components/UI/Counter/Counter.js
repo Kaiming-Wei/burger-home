@@ -8,11 +8,11 @@ const Counter = (props) =>{
     const cartCtx = useContext(CartContext);
 
     const addHandler = () =>{
-        cartCtx.addItem(props.meal);
+        cartCtx.cartDispatch({type: 'ADD_ITEM', meal: props.meal});
     }
 
     const deleteHandler = () =>{
-        cartCtx.deleteItem(props.meal);
+        cartCtx.cartDispatch({type: 'DELETE_ITEM', meal: props.meal});
     }
 
     return(

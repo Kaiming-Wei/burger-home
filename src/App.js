@@ -1,5 +1,5 @@
 import MealsList from './Components/MealsList/MealsList';
-import {useState} from 'react';
+import {useReducer, useState} from 'react';
 import CartContext from './Store/CartContext';
 import Search from './Components/Search/Search';
 import Cart from './Components/Cart/Cart';
@@ -56,49 +56,102 @@ const MEALS_DATA = [
   }
 ];
 
+const cartReducer = (state, action) =>{
+  const cartMap = {...state};
+
+  switch(action.type){
+    default:
+      return cartMap;
+    
+    case 'ADD_ITEM':
+      if(cartMap.items.indexOf(action.meal) === -1){
+        cartMap.items.push(action.meal)
+        action.meal.amount = 1;
+      }else{
+        action.meal.amount += 1;
+      }
+      cartMap['totalItem'] = (cartMap['totalItem'] || 0) + 1;
+      cartMap['totalPrice'] = (cartMap['totalPrice'] || 0) + action.meal.price;
+      return cartMap;
+    
+    case 'DELETE_ITEM':
+      action.meal.amount -= 1;
+      if(action.meal.amount === 0){
+        cartMap.items.splice(cartMap.items.indexOf(action.meal), 1);
+      }
+      cartMap['totalItem'] = (cartMap['totalItem']) - 1;
+      if(cartMap['totalItem'] < 0) cartMap['totalItem'] = 0;
+
+      cartMap['totalPrice'] = (cartMap['totalPrice']) - action.meal.price;
+      if(cartMap['totalPrice'] < 0) cartMap['totalPrice'] = 0; 
+      return cartMap;
+
+    case 'CLEAR':
+      cartMap.items.forEach(item => item.amount = 0)
+      cartMap.items = [];
+      cartMap.totalItem = 0;
+      cartMap.totalPrice = 0.0;
+      return(cartMap);
+  }
+
+}
+
 function App() {
   const [meals, setMeals] = useState(MEALS_DATA);
-  const [cart, setCart] = useState({
+
+  const [cart, cartDispatch] = useReducer(cartReducer, {
     items : [],
     totalItem: 0,
     totalPrice: 0.0
-  });
+  })
 
-  const addItem = (meal) => {
-      setCart(prevCart => {
-          const cartMap = {...prevCart};
-          if(cartMap.items.indexOf(meal) === -1){
-            cartMap.items.push(meal)
-            meal.amount = 1;
-          }else{
-            meal.amount += 1;
-          }
-          cartMap['totalItem'] = (cartMap['totalItem'] || 0) + 1;
-          cartMap['totalPrice'] = (cartMap['totalPrice'] || 0) + meal.price;
-          return cartMap;
-      });
+  // const addItem = (meal) => {
+  //     setCart(prevCart => {
+  //         const cartMap = {...prevCart};
+  //         if(cartMap.items.indexOf(meal) === -1){
+  //           cartMap.items.push(meal)
+  //           meal.amount = 1;
+  //         }else{
+  //           meal.amount += 1;
+  //         }
+  //         cartMap['totalItem'] = (cartMap['totalItem'] || 0) + 1;
+  //         cartMap['totalPrice'] = (cartMap['totalPrice'] || 0) + meal.price;
+  //         return cartMap;
+  //     });
 
 
-  }
-  const deleteItem = (meal) => {
-    setCart(prevCart => {
-        let cartMap = {...prevCart};
-        meal.amount -= 1;
-        if(meal.amount === 0){
-          cartMap.items.splice(cartMap.items.indexOf(meal), 1);
-        }
-        cartMap['totalItem'] = (cartMap['totalItem']) - 1;
-        if(cartMap['totalItem'] < 0) cartMap['totalItem'] = 0;
+  // }
+  // const deleteItem = (meal) => {
+  //   setCart(prevCart => {
+  //       let cartMap = {...prevCart};
+  //       meal.amount -= 1;
+  //       if(meal.amount === 0){
+  //         cartMap.items.splice(cartMap.items.indexOf(meal), 1);
+  //       }
+  //       cartMap['totalItem'] = (cartMap['totalItem']) - 1;
+  //       if(cartMap['totalItem'] < 0) cartMap['totalItem'] = 0;
 
-        cartMap['totalPrice'] = (cartMap['totalPrice']) - meal.price;
-        if(cartMap['totalPrice'] < 0) cartMap['totalPrice'] = 0; 
-        return cartMap;
-    });
+  //       cartMap['totalPrice'] = (cartMap['totalPrice']) - meal.price;
+  //       if(cartMap['totalPrice'] < 0) cartMap['totalPrice'] = 0; 
+  //       return cartMap;
+  //   });
+  // }
 
-  }
-  const searchItem = (event) => {
-    let keyword = event.target.value.toLowerCase();
-    if(keyword === ""){
+    // const emptyCart = () => {
+  //   setCart( (prevs) => {
+  //     let cartMap = {...prevs};
+  //     cartMap.items.forEach(item => item.amount = 0)
+  //     cartMap.items = [];
+  //     cartMap.totalItem = 0;
+  //     cartMap.totalPrice = 0.0;
+  //     return(cartMap);
+  //   });
+    
+  // }
+
+  const searchItem = (keyword) => {
+    // let keyword = event.target.value.toLowerCase();
+    if(keyword === ''){
       setMeals(MEALS_DATA);
       return;
     }
@@ -109,26 +162,14 @@ function App() {
         item.price.toString().includes(keyword)
       )
     });
-
-    setMeals(filterMeal);
-  }
-
-  const emptyCart = () => {
-    setCart( (prevs) => {
-      let cartMap = {...prevs};
-      cartMap.items.forEach(item => item.amount = 0)
-      cartMap.items = [];
-      cartMap.totalItem = 0;
-      cartMap.totalPrice = 0.0;
-      return(cartMap);
-    });
     
+    setMeals(filterMeal);
   }
 
   return (
     <div>
           <Search searchItem={searchItem}/>
-          <CartContext.Provider value={{...cart, addItem, deleteItem, emptyCart}}>
+          <CartContext.Provider value={{...cart, cartDispatch}}>
             <MealsList meals={meals}/>
             <Cart/>
           </CartContext.Provider>

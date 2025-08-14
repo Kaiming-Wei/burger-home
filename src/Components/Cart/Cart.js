@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import iconImg from '../../asset/bag.png';
 import classes from './Cart.module.css';
 import CartContext from '../../Store/CartContext';
@@ -27,6 +27,13 @@ const Cart = () => {
     const onHideCheckout = () =>{
         setshowCheckout(false);
     }
+
+    useEffect( ()=> {
+            if(cart_ctx.totalItem === 0){
+                setshowCart(false);
+                setshowCheckout(false);
+            }
+        }, [cart_ctx]);
 
     return(
         <div onClick={toggleCartDetails} className={classes.Cart}>
